@@ -98,29 +98,20 @@ class Solution
     bool isSumTree(Node* root)
     {
          // Your code here
-         return fast(root).first;
+         pair<bool,int> ans=solve(root);
+         return ans.first;
     }
-    pair<bool,int> fast(Node* root){
-        if(root == NULL){
-            pair<bool,int> p=make_pair(true,0);
-            return p;
-        }
-        if(root->left== NULL && root->right==NULL){
-            pair<bool,int> p=make_pair(true,root->data);
-            return p;
-        }
-        
-        pair<bool,int> left=fast(root->left);
-        pair<bool,int> right=fast(root->right);
-        bool cont = left.second+right.second==root->data;
+    pair<bool,int> solve(Node*root){
+        if(!root) return {true,0};
+        if(!root->left && !root->right) return {true,root->data};
+        pair<bool,int> left=solve(root->left);
+        pair<bool,int> right=solve(root->right);
+        bool cond=left.second+right.second==root->data;
         pair<bool,int> ans;
-        if(left.first && right.first && cont){
-            ans.first=true;
-            ans.second=2*root->data;
+        if(left.first && right.first && cond) {
+            ans.first=true; ans.second=2*root->data;
         }
-        else{
-            ans.first=false;
-        }
+        else ans.first=false;
         return ans;
     }
 };
