@@ -106,40 +106,34 @@ struct Node
 class Solution {
 public:
 void left_traverse(Node* root, vector<int>&ans){
-    if(root==NULL || (root->left== NULL && root->right==NULL)){
-        return;
-    }
-    ans.push_back(root->data);
+    if(!root) return;
+    if(!root->left && !root->right) return;
+      ans.push_back(root->data);
     if(root->left) {
         left_traverse(root->left,ans);
     }
     else left_traverse(root->right,ans);
 }
 void leaf_traverse(Node* root, vector<int>&ans){
-    if(root==NULL ){
-        return;
-    }
-    if(root->left== NULL && root->right==NULL){
-    ans.push_back(root->data); return;}
-     
-        leaf_traverse(root->left,ans);
+    if(!root) return;
+    if(!root->left && !root->right) ans.push_back(root->data);
+    leaf_traverse(root->left,ans);
      leaf_traverse(root->right,ans);
 }
 void right_traverse(Node* root, vector<int>&ans){
-    if(root==NULL || (root->left== NULL && root->right==NULL)){
-        return;
-    }
+    if(!root) return;
+    if(!root->left && !root->right) return;
     
     if(root->right) {
         right_traverse(root->right,ans);
     }
     else right_traverse(root->left,ans);
-    ans.push_back(root->data);
+      ans.push_back(root->data);
 }
     vector <int> boundary(Node *root)
     {
         //Your code here
-        if(root==NULL) return {};
+        if(!root) return {};
         vector<int> ans;
         ans.push_back(root->data);
         left_traverse(root->left,ans);
