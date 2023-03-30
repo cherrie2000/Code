@@ -27,7 +27,7 @@ class Solution{
         vector<int>ans;
         for(auto it:a) ans.push_back(it); for(auto it:b) ans.push_back(it);
         int size=ans.size();
-        for(int i=size/2;i>=0;i--){
+        for(int i=size/2-1;i>=0;i--){
             heapify(ans,size,i);
         }
         return ans;
